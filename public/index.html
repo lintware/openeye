@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorldView</title>
+
+  <!-- CesiumJS via CDN -->
+  <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Widgets/widgets.css">
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.119/Build/Cesium/Cesium.js"></script>
+
+  <!-- satellite.js via CDN -->
+  <script src="https://unpkg.com/satellite.js@5.0.0/dist/satellite.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="load-text">Loading WorldView...</div>
+  </div>
+
+  <!-- Cesium container -->
+  <div id="cesiumContainer"></div>
+
+  <!-- Top bar -->
+  <div id="topBar">
+    <span class="logo">WorldView</span>
+
+    <input id="searchBox" type="text" placeholder="Search aircraft or satellite...">
+    <div id="searchResults"></div>
+
+    <div class="controls">
+      <!-- Layer toggles -->
+      <button id="btnAircraft" class="ctrl-btn active" onclick="toggleAircraft()">Aircraft</button>
+      <button id="btnSatellites" class="ctrl-btn active" onclick="toggleSatellites()">Satellites</button>
+
+      <div class="separator"></div>
+
+      <!-- Time controls -->
+      <div id="timeControls">
+        <span class="time-label">Speed</span>
+        <button class="time-btn" data-speed="1" onclick="setTimeMultiplier(1)">1x</button>
+        <button class="time-btn" data-speed="10" onclick="setTimeMultiplier(10)">10x</button>
+        <button class="time-btn" data-speed="100" onclick="setTimeMultiplier(100)">100x</button>
+        <button class="time-btn" data-speed="1000" onclick="setTimeMultiplier(1000)">1000x</button>
+      </div>
+
+      <div class="separator"></div>
+
+      <span id="simClock" style="font-size:11px; color:rgba(255,255,255,0.5); font-variant-numeric:tabular-nums; min-width:160px;"></span>
+    </div>
+  </div>
+
+  <!-- Detail panel -->
+  <div id="detailPanel"></div>
+
+  <!-- Stats bar -->
+  <div id="statsBar">
+    <span><span class="dot dot-aircraft"></span> Aircraft: <strong id="statAircraft">0</strong></span>
+    <span><span class="dot dot-satellite"></span> Satellites: <strong id="statSatellites">0</strong></span>
+    <span><span class="dot dot-time"></span> Time: <strong id="statTime">1x</strong></span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
